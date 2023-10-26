@@ -1,20 +1,33 @@
-import React from 'react';
+import React from "react";
 import Tabs from "./Tabs";
-import TabPane from "./TabPane";
+import Feed from "./Feed";
+import useTopics from "./useTopics";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 function App() {
+  const { isLoading, isError, topics } = useTopics();
+
+  const view = (
+    <div>
+      <Tabs topics={topics} />
+      <Routes>
+        <Route path="/" element={<Navigate to={topics[0]?.body} />} />
+        {topics.map((topic) => (
+          <Route
+            path={`/${topic.body}`}
+            element={<Feed topic={topic.body} />}
+            key={topic.id}
+          />
+        ))}
+      </Routes>
+    </div>
+  );
+
   return (
-      <Tabs>
-          <TabPane name="Tab 1" key="1">
-              Content of Tab Pane 1
-          </TabPane>
-          <TabPane name="Tab 2" key="2">
-              Content of Tab Pane 2
-          </TabPane>
-          <TabPane name="Tab 3" key="3">
-              Content of Tab Pane 3
-          </TabPane>
-      </Tabs>
+    <>
+      {isLoading && <div>Loading...</div>}
+      {(isError && <div>Error!</div>) || view}
+    </>
   );
 }
 
