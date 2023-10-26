@@ -1,5 +1,5 @@
-import { getTopics } from "./api";
-import useApi from "./useApi";
+import useApi from "../../data/useApi";
+import { getTopics } from "../../data/api";
 
 export default function useTopics() {
   const { data, ...others } = useApi(getTopics, [], []);

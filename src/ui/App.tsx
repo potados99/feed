@@ -1,7 +1,7 @@
+import Feed from "./feed/Feed";
+import Tabs from "./topics/Tabs";
 import React from "react";
-import Tabs from "./Tabs";
-import Feed from "./Feed";
-import useTopics from "./useTopics";
+import useTopics from "./topics/useTopics";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 function App() {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Message } from "./api";
+import { Message } from "../../data/api";
 
 type Props = {
   topics: Message[];

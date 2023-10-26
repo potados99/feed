@@ -1,5 +1,5 @@
-import { getFeed } from "./api";
-import useApi from "./useApi";
+import useApi from "../../data/useApi";
+import { getFeed } from "../../data/api";
 
 export default function useFeed(topic: string) {
   const { data, ...others } = useApi(
