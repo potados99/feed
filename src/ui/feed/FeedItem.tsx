@@ -1,14 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import { Message } from "../../data/api";
+import Skeleton from "react-loading-skeleton";
 
 type Props = {
-  message: Message;
+  isLoading?: boolean;
+  message?: Message;
   hasNext: boolean;
   hasPrevious: boolean;
 };
 
-export default function FeedItem({ message, hasNext, hasPrevious }: Props) {
+export default function FeedItem({
+  isLoading,
+  message,
+  hasNext,
+  hasPrevious,
+}: Props) {
   return (
     <Container onClick={() => alert(JSON.stringify(message))}>
       <GraphContainer>
@@ -17,8 +24,10 @@ export default function FeedItem({ message, hasNext, hasPrevious }: Props) {
         <Line visible={hasNext} />
       </GraphContainer>
       <ContentContainer>
-        <BodyText>{message.body}</BodyText>
-        <DateText>{message.date}</DateText>
+        <BodyText>
+          {isLoading ? <Skeleton height={32} /> : message?.body}
+        </BodyText>
+        <DateText>{isLoading ? <Skeleton /> : message?.date}</DateText>
       </ContentContainer>
     </Container>
   );
@@ -29,11 +38,12 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: stretch;
+  margin-left: 12px;
+  margin-right: 12px;
 `;
 
 const GraphContainer = styled.div`
-  width: 50px;
-
+  margin-right: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,11 +70,13 @@ const ContentContainer = styled.div`
   margin-bottom: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: start;
+  justify-content: stretch;
+  align-items: stretch;
 `;
 
-const BodyText = styled.span``;
+const BodyText = styled.span`
+  flex: 1;
+`;
 
 const DateText = styled.span`
   margin-top: 4px;

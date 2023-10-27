@@ -3,6 +3,8 @@ import useFeed from "./useFeed";
 import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
 import FeedItem from "./FeedItem";
+import FeedSkeleton from "./FeedSkeleton";
+import { ErrorView } from "../../common/boilerplate";
 
 type Props = {
   topic: string;
@@ -26,8 +28,8 @@ export default function Feed({ topic }: Props) {
 
   return (
     <>
-      {isLoading && <Skeleton count={10} />}
-      {isError && <div>Error!</div>}
+      {isLoading && <FeedSkeleton count={5} />}
+      {isError && <ErrorView />}
       {!isLoading && !isError && view}
     </>
   );

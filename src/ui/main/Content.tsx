@@ -4,6 +4,7 @@ import Feed from "../feed/Feed";
 import Skeleton from "react-loading-skeleton";
 import { TopicConsumerProps } from "../../common/types";
 import { ErrorView } from "../../common/boilerplate";
+import FeedSkeleton from "../feed/FeedSkeleton";
 
 export default function Content({
   isLoading,
@@ -25,7 +26,7 @@ export default function Content({
 
   return (
     <>
-      {isLoading && <Skeleton count={10} />}
+      {isLoading && <FeedSkeleton count={5} />}
       {isError && <ErrorView />}
       {!isLoading && !isError && view}
     </>
