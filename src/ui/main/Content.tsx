@@ -5,6 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import { TopicConsumerProps } from "../../common/types";
 import { ErrorView } from "../../common/boilerplate";
 import FeedSkeleton from "../feed/FeedSkeleton";
+import styled from "styled-components";
 
 export default function Content({
   isLoading,
@@ -25,10 +26,15 @@ export default function Content({
   );
 
   return (
-    <>
+    <Container>
       {isLoading && <FeedSkeleton count={5} />}
       {isError && <ErrorView />}
       {!isLoading && !isError && view}
-    </>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  margin-left: 12px;
+  margin-right: 12px;
+`;

@@ -42,6 +42,4 @@ const SideArea = styled.div`
 
 const ContentArea = styled.div`
   width: 100%; /*아 주 중 요*/
-  padding-left: 12px;
-  padding-right: 12px;
 `;
