@@ -2,6 +2,7 @@ import React from "react";
 import useFeed from "./useFeed";
 import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
+import FeedItem from "./FeedItem";
 
 type Props = {
   topic: string;
@@ -11,16 +12,16 @@ export default function Feed({ topic }: Props) {
   const { isLoading, isError, feed } = useFeed(topic);
 
   const view = (
-    <ol>
-      {feed.map((message) => (
-        <Message
+    <div>
+      {feed.map((message, i) => (
+        <FeedItem
           key={message.id}
-          onClick={() => alert(JSON.stringify(message))}
-        >
-          {message.body}
-        </Message>
+          message={message}
+          hasNext={i < feed.length - 1}
+          hasPrevious={i > 0}
+        />
       ))}
-    </ol>
+    </div>
   );
 
   return (
@@ -31,7 +32,3 @@ export default function Feed({ topic }: Props) {
     </>
   );
 }
-
-const Message = styled.li`
-  margin-top: 16px;
-`;
