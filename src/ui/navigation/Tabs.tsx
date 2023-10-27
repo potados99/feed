@@ -38,7 +38,6 @@ export default function Tabs({
 const Container = styled.div`
   overflow-x: scroll;
   white-space: nowrap;
-  min-width: min-content;
   &::-webkit-scrollbar {
     display: none;
   }

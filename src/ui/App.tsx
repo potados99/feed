@@ -41,7 +41,7 @@ const SideArea = styled.div`
 `;
 
 const ContentArea = styled.div`
-  flex: 1;
+  width: 100%; /*아 주 중 요*/
   padding-left: 12px;
   padding-right: 12px;
 `;
