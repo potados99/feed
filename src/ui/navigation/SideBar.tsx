@@ -10,25 +10,25 @@ export default function SideBar({
   isError,
   topics,
 }: TopicConsumerProps) {
-  const view = (
-    <div>
-      {topics.map((topic) => (
-        <Topic key={topic.id}>
-          <Link to={`/${topic.body}`}>{topic.body}</Link>
-        </Topic>
-      ))}
-    </div>
-  );
+  const view = topics.map((topic) => (
+    <Topic key={topic.id}>
+      <Link to={`/${topic.body}`}>{topic.body}</Link>
+    </Topic>
+  ));
 
   return (
-    <>
+    <Container>
       {isLoading && <Skeleton count={4} />}
       {isError && <div>Error!</div>}
       {!isLoading && !isError && view}
-    </>
+    </Container>
   );
 }
 
+const Container = styled.div`
+  margin-top: 12px;
+`;
+
 const Topic = styled.div`
-  margin-top: 8px;
+  margin-bottom: 8px;
 `;

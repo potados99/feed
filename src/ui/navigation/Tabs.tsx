@@ -28,7 +28,14 @@ export default function Tabs({
 
   return (
     <Container>
-      {isLoading && <InlineSkeleton count={3} width={100} height={24} />}
+      {isLoading && (
+        <InlineSkeleton
+          count={3}
+          width={100}
+          height={24}
+          style={{ marginTop: "12px", marginLeft: "12px" }}
+        />
+      )}
       {isError && <HorizontalErrorView />}
       {!isLoading && !isError && view}
     </Container>
