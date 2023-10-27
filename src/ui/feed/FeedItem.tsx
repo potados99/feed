@@ -19,9 +19,9 @@ export default function FeedItem({
   return (
     <Container onClick={() => alert(JSON.stringify(message))}>
       <GraphContainer>
-        <Line visible={hasPrevious} />
+        <Line $visible={hasPrevious} />
         <Dot />
-        <Line visible={hasNext} />
+        <Line $visible={hasNext} />
       </GraphContainer>
       <ContentContainer>
         <BodyText>
@@ -37,7 +37,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: stretch;
+  align-items: stretch; /*이게 있어야 선이 위아래로 확장돼요*/
 `;
 
 const GraphContainer = styled.div`
@@ -48,11 +48,11 @@ const GraphContainer = styled.div`
   align-items: center;
 `;
 
-const Line = styled.div<{ visible: boolean }>`
+const Line = styled.div<{ $visible: boolean }>`
   flex: 1;
   width: 2px;
   background-color: #07f;
-  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  visibility: ${({ $visible }) => ($visible ? "visible" : "hidden")};
 `;
 
 const Dot = styled.div`

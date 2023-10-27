@@ -36,16 +36,15 @@ export default function Tabs({
 }
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: row;
   overflow-x: scroll;
-  height: 56px;
-
+  white-space: nowrap;
+  min-width: min-content;
   &::-webkit-scrollbar {
     display: none;
   }
 `;
 
 const Topic = styled.div`
+  display: inline-block;
   margin: 8px;
 `;

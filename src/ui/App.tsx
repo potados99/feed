@@ -42,6 +42,6 @@ const SideArea = styled.div`
 
 const ContentArea = styled.div`
   flex: 1;
-  margin-left: 12px;
-  margin-right: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
 `;
