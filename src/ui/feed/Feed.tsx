@@ -1,6 +1,7 @@
 import React from "react";
 import useFeed from "./useFeed";
 import styled from "styled-components";
+import Skeleton from "react-loading-skeleton";
 
 type Props = {
   topic: string;
@@ -24,7 +25,7 @@ export default function Feed({ topic }: Props) {
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <Skeleton count={10} />}
       {isError && <div>Error!</div>}
       {!isLoading && !isError && view}
     </>

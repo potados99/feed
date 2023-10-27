@@ -2,13 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Message } from "../../data/api";
 import styled from "styled-components";
+import Skeleton from "react-loading-skeleton";
 
 type Props = {
+  isLoading: boolean;
+  isError: boolean;
   topics: Message[];
 };
 
-export default function Tabs({ topics }: Props) {
-  return (
+export default function Navigation({ isLoading, isError, topics }: Props) {
+  const view = (
     <div>
       {topics.map((topic) => (
         <Topic key={topic.id}>
@@ -16,6 +19,14 @@ export default function Tabs({ topics }: Props) {
         </Topic>
       ))}
     </div>
+  );
+
+  return (
+    <>
+      {isLoading && <Skeleton count={4} />}
+      {isError && <div>Error!</div>}
+      {!isLoading && !isError && view}
+    </>
   );
 }
 
