@@ -3,14 +3,13 @@ import { Link } from "react-router-dom";
 import { Message } from "../../data/api";
 import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
+import { TopicConsumerProps } from "../../common/types";
 
-type Props = {
-  isLoading: boolean;
-  isError: boolean;
-  topics: Message[];
-};
-
-export default function Navigation({ isLoading, isError, topics }: Props) {
+export default function SideBar({
+  isLoading,
+  isError,
+  topics,
+}: TopicConsumerProps) {
   const view = (
     <div>
       {topics.map((topic) => (

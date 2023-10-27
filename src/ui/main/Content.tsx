@@ -1,16 +1,15 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Feed from "../feed/Feed";
-import { Message } from "../../data/api";
 import Skeleton from "react-loading-skeleton";
+import { TopicConsumerProps } from "../../common/types";
+import { ErrorView } from "../../common/boilerplate";
 
-type Props = {
-  isLoading: boolean;
-  isError: boolean;
-  topics: Message[];
-};
-
-export default function Content({ isLoading, isError, topics }: Props) {
+export default function Content({
+  isLoading,
+  isError,
+  topics,
+}: TopicConsumerProps) {
   const view = (
     <Routes>
       <Route path="/" element={<Navigate to={topics[0]?.body} />} />
@@ -27,7 +26,7 @@ export default function Content({ isLoading, isError, topics }: Props) {
   return (
     <>
       {isLoading && <Skeleton count={10} />}
-      {isError && <div>Error!</div>}
+      {isError && <ErrorView />}
       {!isLoading && !isError && view}
     </>
   );

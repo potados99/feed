@@ -1,18 +1,45 @@
 import React from "react";
 import Content from "./main/Content";
 import useTopics from "./main/useTopics";
-import Navigation from "./main/Navigation";
-import Skeleton from "react-loading-skeleton";
+import Tabs from "./navigation/Tabs";
+import SideBar from "./navigation/SideBar";
+import useScreenSize from "../common/useScreenSize";
+import styled from "styled-components";
 
-function App() {
-  const { isLoading, isError, topics } = useTopics();
+export default function App() {
+  const props = useTopics();
+  const { width } = useScreenSize();
+
+  const isWideScreen = width > 768;
+  const needSidebar = isWideScreen;
+  const needTabs = !isWideScreen;
 
   return (
-    <div>
-      <Navigation isLoading={isLoading} isError={isError} topics={topics} />
-      <Content isLoading={isLoading} isError={isError} topics={topics} />
-    </div>
+    <Container>
+      {needSidebar && (
+        <SideArea>
+          <SideBar {...props} />
+        </SideArea>
+      )}
+      <ContentArea>
+        {needTabs && <Tabs {...props} />}
+        <Content {...props} />
+      </ContentArea>
+    </Container>
   );
 }
 
-export default App;
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const SideArea = styled.div`
+  width: 120px;
+  margin-right: 12px;
+`;
+
+const ContentArea = styled.div`
+  flex: 1;
+`;
