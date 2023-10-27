@@ -19,7 +19,8 @@ export default function Feed({ topic }: Props) {
   return (
     <>
       {isLoading && <div>Loading...</div>}
-      {(isError && <div>Error!</div>) || view}
+      {isError && <div>Error!</div>}
+      {!isLoading && !isError && view}
     </>
   );
 }
