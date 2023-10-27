@@ -38,12 +38,10 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: stretch;
-  margin-left: 12px;
-  margin-right: 12px;
 `;
 
 const GraphContainer = styled.div`
-  margin-right: 16px;
+  padding-right: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
