@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Message } from "../../data/api";
 import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
 import { TopicConsumerProps } from "../../common/types";
+import PathAwaredLink from "./PathAwaredLink";
 
 export default function SideBar({
   isLoading,
@@ -12,13 +11,15 @@ export default function SideBar({
 }: TopicConsumerProps) {
   const view = topics.map((topic) => (
     <Topic key={topic.id}>
-      <Link to={`/${topic.body}`}>{topic.body}</Link>
+      <PathAwaredLink to={`/${topic.body}`}>{topic.body}</PathAwaredLink>
     </Topic>
   ));
 
   return (
     <Container>
-      {isLoading && <Skeleton count={4} />}
+      {isLoading && (
+        <Skeleton count={4} height={26} style={{ marginBottom: "8px" }} />
+      )}
       {isError && <div>Error!</div>}
       {!isLoading && !isError && view}
     </Container>

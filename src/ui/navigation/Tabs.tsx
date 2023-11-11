@@ -1,15 +1,8 @@
-import react, { PropsWithChildren } from "react";
 import { TopicConsumerProps } from "../../common/types";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import React from "react";
-import Skeleton from "react-loading-skeleton";
-import { InlineWrapperWithMargin } from "../../common/wrapper";
-import {
-  ErrorView,
-  HorizontalErrorView,
-  InlineSkeleton,
-} from "../../common/boilerplate";
+import { HorizontalErrorView, InlineSkeleton } from "../../common/boilerplate";
+import PathAwaredLink from "./PathAwaredLink";
 
 export default function Tabs({
   isLoading,
@@ -20,7 +13,7 @@ export default function Tabs({
     <>
       {topics.map((topic) => (
         <Topic key={topic.id}>
-          <Link to={`/${topic.body}`}>{topic.body}</Link>
+          <PathAwaredLink to={`/${topic.body}`}>{topic.body}</PathAwaredLink>
         </Topic>
       ))}
     </>
@@ -32,7 +25,7 @@ export default function Tabs({
         <InlineSkeleton
           count={3}
           width={100}
-          height={24}
+          height={29}
           style={{ marginTop: "12px", marginLeft: "12px" }}
         />
       )}
@@ -52,5 +45,5 @@ const Container = styled.div`
 
 const Topic = styled.div`
   display: inline-block;
-  margin: 8px;
+  margin: 8px 4px;
 `;
