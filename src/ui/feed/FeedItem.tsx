@@ -74,6 +74,7 @@ const ContentContainer = styled.div`
 
 const BodyText = styled.span`
   flex: 1;
+  word-break: break-word;
 `;
 
 const DateText = styled.span`
