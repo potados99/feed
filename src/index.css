@@ -11,3 +11,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0px rgba(0, 127, 255, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 12px rgba(0, 127, 255, 0);
+  }
+}

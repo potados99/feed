@@ -20,7 +20,7 @@ export default function FeedItem({
     <Container onClick={() => alert(JSON.stringify(message))}>
       <GraphContainer>
         <Line $visible={hasPrevious} />
-        <Dot />
+        <Dot $active={!isLoading && !hasPrevious} />
         <Line $visible={hasNext} />
       </GraphContainer>
       <ContentContainer>
@@ -55,11 +55,14 @@ const Line = styled.div<{ $visible: boolean }>`
   visibility: ${({ $visible }) => ($visible ? "visible" : "hidden")};
 `;
 
-const Dot = styled.div`
+const Dot = styled.div<{ $active: boolean }>`
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background-color: #07f;
+
+  animation: ${({ $active }) =>
+    $active ? "pulse-animation 2s infinite" : "none"};
 `;
 
 const ContentContainer = styled.div`
