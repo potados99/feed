@@ -21,7 +21,7 @@ export default function PathAwaredLink({ to, children }: Props) {
 }
 
 const Content = styled.div<{ $active: boolean }>`
-  padding: 1px 10px 5px 10px;
+  padding: 1px 10px 4px 10px;
   text-align: center;
   border: 1px solid #e8e8e8;
   border-radius: 30px;
