@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Message } from "../../data/api";
 import Skeleton from "react-loading-skeleton";
+import Markdown from "react-markdown";
 
 type Props = {
   isLoading?: boolean;
@@ -24,9 +25,13 @@ export default function FeedItem({
         <Line $visible={hasNext} />
       </GraphContainer>
       <ContentContainer>
-        <BodyText>
-          {isLoading ? <Skeleton height={32} /> : message?.body}
-        </BodyText>
+        <Content>
+          {isLoading ? (
+            <Skeleton height={32} />
+          ) : (
+            <StyledMarkdown>{message?.body}</StyledMarkdown>
+          )}
+        </Content>
         <DateText>{isLoading ? <Skeleton /> : message?.date}</DateText>
       </ContentContainer>
     </Container>
@@ -75,7 +80,7 @@ const ContentContainer = styled.div`
   align-items: stretch;
 `;
 
-const BodyText = styled.span`
+const Content = styled.div`
   flex: 1;
   word-break: break-word;
 `;
@@ -84,4 +89,12 @@ const DateText = styled.span`
   margin-top: 4px;
   font-size: 12px;
   color: #456;
+`;
+
+const StyledMarkdown = styled(Markdown)`
+  margin: -12px 0; // Markdown 컴포넌트가 기본적으로 제공하는 margin을 제거합니다.
+
+  img {
+    max-width: 100%; // 이미지가 컨테이너를 넘어가지 않도록 합니다.
+  }
 `;
