@@ -1,8 +1,8 @@
-import { TopicConsumerProps } from "../../common/types";
-import styled from "styled-components";
 import React from "react";
-import { HorizontalErrorView, InlineSkeleton } from "../../common/boilerplate";
+import styled from "styled-components";
 import PathAwaredLink from "./PathAwaredLink";
+import { TopicConsumerProps } from "../../common/types";
+import { HorizontalErrorView, InlineSkeleton } from "../../common/boilerplate";
 
 export default function Tabs({
   isLoading,

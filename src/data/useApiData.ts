@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import useApi from "./useApi";
+import React, { useState } from "react";
 
 export default function useApiData<Type>(
   fetcher: () => Promise<Type>,

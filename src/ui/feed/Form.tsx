@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { Message, submitMessage } from "../../data/api";
 import useApi from "../../data/useApi";
+import styled from "styled-components";
 import useScreenSize from "../../common/useScreenSize";
+import { Message, submitMessage } from "../../data/api";
+import React, { useEffect, useState } from "react";
 
 type Props = {
   visible: boolean;

@@ -1,11 +1,10 @@
-import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
 import Feed from "../feed/Feed";
-import Skeleton from "react-loading-skeleton";
-import { TopicConsumerProps } from "../../common/types";
-import { ErrorView } from "../../common/boilerplate";
-import FeedSkeleton from "../feed/FeedSkeleton";
+import React from "react";
 import styled from "styled-components";
+import FeedSkeleton from "../feed/FeedSkeleton";
+import { ErrorView } from "../../common/boilerplate";
+import { TopicConsumerProps } from "../../common/types";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 export default function Content({
   isLoading,

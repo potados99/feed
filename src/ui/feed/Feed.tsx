@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import useFeed from "./useFeed";
+import Form from "./Form";
 import styled from "styled-components";
+import useFeed from "./useFeed";
 import FeedItem from "./FeedItem";
+import { Message } from "../../data/api";
 import FeedSkeleton from "./FeedSkeleton";
 import { ErrorView } from "../../common/boilerplate";
-import Form from "./Form";
-import { Message } from "../../data/api";
+import React, { useState } from "react";
 
 type Props = {
   topic: string;

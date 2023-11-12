@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Message } from "../../data/api";
 import Skeleton from "react-loading-skeleton";
 import Markdown from "react-markdown";
+import { Message } from "../../data/api";
 
 type Props = {
   isLoading?: boolean;

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
-import { TopicConsumerProps } from "../../common/types";
 import PathAwaredLink from "./PathAwaredLink";
+import { TopicConsumerProps } from "../../common/types";
 
 export default function SideBar({
   isLoading,

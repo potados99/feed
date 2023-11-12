@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import React, { PropsWithChildren } from "react";
 import { Link, matchPath, useLocation } from "react-router-dom";
-import styled from "styled-components";
 
 type Props = {
   to: string;

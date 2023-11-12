@@ -1,10 +1,10 @@
+import Tabs from "./navigation/Tabs";
 import React from "react";
+import styled from "styled-components";
+import SideBar from "./navigation/SideBar";
 import Content from "./main/Content";
 import useTopics from "./main/useTopics";
-import Tabs from "./navigation/Tabs";
-import SideBar from "./navigation/SideBar";
 import useScreenSize from "../common/useScreenSize";
-import styled from "styled-components";
 
 export default function App() {
   const props = useTopics();
