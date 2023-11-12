@@ -1,8 +1,9 @@
-import useApi from "../../data/useApi";
+import useApiData from "../../data/useApiData";
 import { getTopics } from "../../data/api";
 
 export default function useTopics() {
-  const { data, ...others } = useApi(getTopics, [], []);
+  const { data, ...others } = useApiData(getTopics, [], []);
+
   return {
     topics: data,
     ...others,

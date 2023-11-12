@@ -23,5 +23,8 @@ export default function useScreenSize() {
     };
   }, []);
 
-  return screenSize;
+  // 이 앱 전용!
+  const isWideScreen = screenSize.width > 768;
+
+  return { ...screenSize, isWideScreen };
 }

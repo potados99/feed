@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { editMessage, postMessage, Message } from "../../data/api";
+import { Message, submitMessage } from "../../data/api";
+import useApi from "../../data/useApi";
 import useScreenSize from "../../common/useScreenSize";
 
 type Props = {
@@ -11,20 +12,13 @@ type Props = {
 };
 
 export default function Form({ topic, message, onClose, onSubmit }: Props) {
-  const { width } = useScreenSize();
+  const { isWideScreen } = useScreenSize();
   const [text, setText] = useState<string>("");
 
-  const isWideScreen = width > 768;
-
-  const send = async () => {
-    if (message) {
-      await editMessage(topic, message.id, text);
-    } else {
-      await postMessage(topic, text);
-    }
-
-    onSubmit();
-  };
+  const { isLoading, isError, invoke } = useApi(
+    () => submitMessage(topic, message, text).then(onSubmit),
+    [topic, message, text],
+  );
 
   useEffect(() => {
     setText(message?.body ?? "");
@@ -34,7 +28,9 @@ export default function Form({ topic, message, onClose, onSubmit }: Props) {
     <Container $widthLimited={isWideScreen}>
       <ButtonBar>
         <Button onClick={onClose}>Back</Button>
-        <MainButton onClick={send}>Send</MainButton>
+        {isLoading && <div>Loading...</div>}
+        {isError && <div>Error!</div>}
+        <MainButton onClick={invoke}>Send</MainButton>
       </ButtonBar>
       <Divider></Divider>
       <TextArea
@@ -78,6 +74,7 @@ const Button = styled.button`
   background-color: transparent;
   border: none;
   height: 100%;
+  font-size: 16px;
 `;
 
 const MainButton = styled.button`
@@ -87,6 +84,7 @@ const MainButton = styled.button`
   height: 100%;
   color: #07f;
   font-weight: bold;
+  font-size: 16px;
 `;
 
 const Divider = styled.div`
@@ -100,4 +98,5 @@ const TextArea = styled.textarea`
   margin: 12px;
   resize: none;
   outline: none;
+  font-size: 16px;
 `;

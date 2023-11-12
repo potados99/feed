@@ -50,6 +50,18 @@ export async function editMessage(
   });
 }
 
+export async function submitMessage(
+  topic: string,
+  message: Message | undefined,
+  text: string,
+) {
+  if (message) {
+    await editMessage(topic, message.id, text);
+  } else {
+    await postMessage(topic, text);
+  }
+}
+
 async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

@@ -74,4 +74,5 @@ const NewButton = styled.button`
   background-color: transparent;
   border: none;
   color: #07f;
+  font-size: 16px;
 `;

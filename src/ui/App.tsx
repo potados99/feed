@@ -8,9 +8,8 @@ import styled from "styled-components";
 
 export default function App() {
   const props = useTopics();
-  const { width } = useScreenSize();
+  const { isWideScreen } = useScreenSize();
 
-  const isWideScreen = width > 768;
   const needSidebar = isWideScreen;
   const needTabs = !isWideScreen;
 
