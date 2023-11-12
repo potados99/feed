@@ -3,8 +3,6 @@ export type Message = {
   channel: string;
   timestamp: number;
   date: string;
-  userAgent: string;
-  sourceId: string;
   body: string;
 };
 
@@ -21,7 +19,17 @@ async function getMessages(channel: string): Promise<Message[]> {
     `https://collect.potados.com/${channel}?response=api`,
   );
   //await sleep(2000);
-  return await res.json();
+  const json = (await res.json()) as any[];
+
+  return json.map((raw) => ({
+    id: raw.id,
+    channel: raw.channel,
+
+    // API가 주는 호환용 필드를 사용합니다.
+    timestamp: raw.timestamp,
+    date: raw.date,
+    body: raw.body,
+  }));
 }
 
 async function sleep(ms: number) {
