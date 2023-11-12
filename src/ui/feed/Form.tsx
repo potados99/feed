@@ -5,13 +5,20 @@ import useApi from "../../data/useApi";
 import useScreenSize from "../../common/useScreenSize";
 
 type Props = {
+  visible: boolean;
   topic: string;
   message?: Message;
   onClose: () => void;
   onSubmit: () => void;
 };
 
-export default function Form({ topic, message, onClose, onSubmit }: Props) {
+export default function Form({
+  visible,
+  topic,
+  message,
+  onClose,
+  onSubmit,
+}: Props) {
   const { isWideScreen } = useScreenSize();
   const [text, setText] = useState<string>("");
 
@@ -25,7 +32,7 @@ export default function Form({ topic, message, onClose, onSubmit }: Props) {
   }, [topic, message]);
 
   return (
-    <Container $widthLimited={isWideScreen}>
+    <Container $visible={visible} $widthLimited={isWideScreen}>
       <ButtonBar>
         <Button onClick={onClose}>Back</Button>
         {isLoading && <div>Loading...</div>}
@@ -42,7 +49,7 @@ export default function Form({ topic, message, onClose, onSubmit }: Props) {
   );
 }
 
-const Container = styled.div<{ $widthLimited: boolean }>`
+const Container = styled.div<{ $visible: boolean; $widthLimited: boolean }>`
   position: fixed;
   width: ${({ $widthLimited }) => ($widthLimited ? "600px" : "inherit")};
   margin: 0 auto;
@@ -59,6 +66,16 @@ const Container = styled.div<{ $widthLimited: boolean }>`
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+  transform: ${({ $visible }) =>
+    $visible ? "translateY(0)" : "translateY(-10%)"};
+  visibility: ${({ $visible }) => ($visible ? "visible" : "collapse")};
+
+  transition:
+    visibility 0.3s ease-in-out,
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
 `;
 
 const ButtonBar = styled.div`

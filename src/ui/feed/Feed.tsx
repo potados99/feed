@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import useFeed from "./useFeed";
 import styled from "styled-components";
-import Skeleton from "react-loading-skeleton";
 import FeedItem from "./FeedItem";
 import FeedSkeleton from "./FeedSkeleton";
 import { ErrorView } from "../../common/boilerplate";
@@ -39,17 +38,16 @@ export default function Feed({ topic }: Props) {
           }}
         />
       ))}
-      {popupVisible && (
-        <Form
-          topic={topic}
-          message={messageInEdit}
-          onClose={() => setPopupVisible(false)}
-          onSubmit={() => {
-            reload();
-            setPopupVisible(false);
-          }}
-        />
-      )}
+      <Form
+        visible={popupVisible}
+        topic={topic}
+        message={messageInEdit}
+        onClose={() => setPopupVisible(false)}
+        onSubmit={() => {
+          reload();
+          setPopupVisible(false);
+        }}
+      />
     </Container>
   );
 
