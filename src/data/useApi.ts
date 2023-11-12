@@ -25,5 +25,6 @@ export default function useApi<Type>(
     isLoading,
     isError,
     data,
+    reload: fetchData,
   };
 }

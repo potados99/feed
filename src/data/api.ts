@@ -32,6 +32,24 @@ async function getMessages(channel: string): Promise<Message[]> {
   }));
 }
 
+export async function postMessage(channel: string, body: string) {
+  await fetch(`https://collect.potados.com/${channel}`, {
+    method: "POST",
+    body,
+  });
+}
+
+export async function editMessage(
+  channel: string,
+  messageId: string,
+  body: string,
+) {
+  await fetch(`https://collect.potados.com/${channel}/${messageId}`, {
+    method: "PATCH",
+    body,
+  });
+}
+
 async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

@@ -9,6 +9,7 @@ type Props = {
   message?: Message;
   hasNext: boolean;
   hasPrevious: boolean;
+  onClick?: () => void;
 };
 
 export default function FeedItem({
@@ -16,9 +17,10 @@ export default function FeedItem({
   message,
   hasNext,
   hasPrevious,
+  onClick,
 }: Props) {
   return (
-    <Container onClick={() => alert(JSON.stringify(message))}>
+    <Container onClick={onClick}>
       <GraphContainer>
         <Line $visible={hasPrevious} />
         <Dot $active={!isLoading && !hasPrevious} />
