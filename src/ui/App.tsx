@@ -36,7 +36,10 @@ const Container = styled.div`
 
 const SideArea = styled.div`
   width: 120px;
+  height: 100vh;
   margin-right: 12px;
+  position: sticky;
+  top: 0;
 `;
 
 const ContentArea = styled.div`

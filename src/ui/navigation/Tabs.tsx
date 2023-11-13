@@ -41,6 +41,12 @@ const Container = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  background: white;
+  border-bottom: 1px solid #e6e6e6;
+
+  position: sticky;
+  top: 0;
 `;
 
 const Topic = styled.div`
