@@ -1,6 +1,6 @@
 html {
-    width: 100vw; // as wide as the screen width, not affected by the scroll bar.
-    overflow-x: hidden; // prevent horizontal scroll.
+    width: 100vw; /* as wide as the screen width, not affected by the scroll bar.*/
+    overflow-x: hidden; /* prevent horizontal scroll.*/
 }
 
 body {
