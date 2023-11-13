@@ -32,7 +32,7 @@ export default function Feed({ topic }: Props) {
           message={message}
           hasNext={i < feed.length - 1}
           hasPrevious={i > 0}
-          onClick={() => {
+          onEdit={() => {
             setMessageInEdit(message);
             setPopupVisible(true);
           }}

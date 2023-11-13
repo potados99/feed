@@ -9,7 +9,7 @@ type Props = {
   message?: Message;
   hasNext: boolean;
   hasPrevious: boolean;
-  onClick?: () => void;
+  onEdit?: () => void;
 };
 
 export default function FeedItem({
@@ -17,10 +17,10 @@ export default function FeedItem({
   message,
   hasNext,
   hasPrevious,
-  onClick,
+  onEdit,
 }: Props) {
   return (
-    <Container onClick={onClick}>
+    <Container>
       <GraphContainer>
         <Line $visible={hasPrevious} />
         <Dot $active={!isLoading && !hasPrevious} />
@@ -34,7 +34,17 @@ export default function FeedItem({
             <StyledMarkdown>{message?.body}</StyledMarkdown>
           )}
         </Content>
-        <DateText>{isLoading ? <Skeleton /> : message?.date}</DateText>
+        <Footer>
+          {isLoading ? (
+            <Skeleton width={200} />
+          ) : (
+            <>
+              <FooterAction>{message?.date}</FooterAction>
+              <FooterSpace>·</FooterSpace>
+              <FooterAction onClick={onEdit}>편집</FooterAction>
+            </>
+          )}
+        </Footer>
       </ContentContainer>
     </Container>
   );
@@ -87,10 +97,22 @@ const Content = styled.div`
   word-break: break-word;
 `;
 
-const DateText = styled.span`
+const Footer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+`;
+
+const FooterAction = styled.span`
   margin-top: 4px;
   font-size: 12px;
   color: #456;
+`;
+
+const FooterSpace = styled(FooterAction)`
+  margin-left: 6px;
+  margin-right: 6px;
 `;
 
 const StyledMarkdown = styled(Markdown)`

@@ -1,6 +1,7 @@
 import useApi from "../../data/useApi";
 import styled from "styled-components";
 import useScreenSize from "../../common/useScreenSize";
+import { IoIosArrowBack } from "react-icons/io";
 import { Message, submitMessage } from "../../data/api";
 import React, { useEffect, useState } from "react";
 
@@ -34,10 +35,13 @@ export default function Form({
   return (
     <Container $visible={visible} $widthLimited={isWideScreen}>
       <ButtonBar>
-        <Button onClick={onClose}>Back</Button>
+        <LeftButton onClick={onClose}>
+          <IoIosArrowBack size={28} />
+        </LeftButton>
         {isLoading && <div>Loading...</div>}
         {isError && <div>Error!</div>}
-        <MainButton onClick={invoke}>Send</MainButton>
+        {!isLoading && !isError && (message ? "편집" : "작성")}
+        <MainButton onClick={invoke}>완료</MainButton>
       </ButtonBar>
       <Divider></Divider>
       <TextArea
@@ -87,8 +91,8 @@ const ButtonBar = styled.div`
   height: 42px;
 `;
 
-const Button = styled.button`
-  padding: 6px 16px;
+const LeftButton = styled.button`
+  padding: 6px 16px 6px 8px;
   background-color: transparent;
   border: none;
   height: 100%;
