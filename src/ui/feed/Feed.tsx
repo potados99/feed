@@ -5,7 +5,7 @@ import FeedItem from "./FeedItem";
 import { Message } from "../../data/api";
 import FeedSkeleton from "./FeedSkeleton";
 import { ErrorView } from "../../common/boilerplate";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type Props = {
   topic: string;
@@ -15,6 +15,11 @@ export default function Feed({ topic }: Props) {
   const { isLoading, isError, feed, reload } = useFeed(topic);
   const [popupVisible, setPopupVisible] = useState(false);
   const [messageInEdit, setMessageInEdit] = useState<Message>();
+
+  useEffect(() => {
+    popupVisible && (document.body.style.overflow = "hidden");
+    !popupVisible && (document.body.style.overflow = "unset");
+  }, [popupVisible]);
 
   const view = (
     <Container>

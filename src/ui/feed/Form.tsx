@@ -72,14 +72,12 @@ const Container = styled.div<{ $visible: boolean; $widthLimited: boolean }>`
   box-shadow: ${({ $widthLimited }) =>
     $widthLimited ? "0 0 10px 0 rgba(0, 0, 0, 0.2)" : "none"};
 
-  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transform: ${({ $visible }) =>
-    $visible ? "translateY(0)" : "translateY(+5%)"};
+    $visible ? "translateY(0)" : "translateY(+100%)"};
   visibility: ${({ $visible }) => ($visible ? "visible" : "collapse")};
 
   transition:
     visibility 0.2s ease-in-out,
-    opacity 0.2s ease-in-out,
     transform 0.2s ease-in-out;
 `;
 
