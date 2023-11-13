@@ -37,15 +37,15 @@ export default function Form() {
           <LeftButton onClick={onClose}>
             <IoIosArrowBack size={28} />
           </LeftButton>
-          {isLoading && <div>Loading...</div>}
-          {isError && <div>Error!</div>}
+          {isLoading && <div>로드 중...</div>}
+          {isError && <div>문제 발생!</div>}
           {!isLoading && !isError && (messageId ? "편집" : "작성")}
           <MainButton onClick={submit}>완료</MainButton>
         </ButtonBar>
         <Divider></Divider>
         <TextArea
           ref={textAreaRef}
-          placeholder={"Markdown supported!"}
+          placeholder={(!isLoading && !isError && "마크다운 지원됨!") || ""}
           value={text}
           onChange={(e) => setText(e.target.value)}
         ></TextArea>
