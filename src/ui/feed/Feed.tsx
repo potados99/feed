@@ -17,8 +17,12 @@ export default function Feed({ topic }: Props) {
   const location = useLocation();
 
   useEffect(() => {
-    return feedEventChannel.on("onInvalidate", reload);
-  }, []);
+    const unsubscribe = feedEventChannel.on("onInvalidate", reload);
+
+    return () => {
+      unsubscribe();
+    };
+  }, [topic, reload]);
 
   const view = (
     <Container>
