@@ -21,7 +21,27 @@ async function getMessages(channel: string): Promise<Message[]> {
   //await sleep(2000);
   const json = (await res.json()) as any[];
 
-  return json.map((raw) => ({
+  return json.map(parseMessage);
+}
+
+export async function getMessage(
+  channel: string,
+  messageId?: string,
+): Promise<Message | undefined> {
+  if (messageId == null) {
+    return undefined;
+  }
+
+  const res = await fetch(
+    `https://collect.potados.com/${channel}/${messageId}?response=api`,
+  );
+  const json = (await res.json()) as any;
+
+  return parseMessage(json);
+}
+
+function parseMessage(raw: any): Message {
+  return {
     id: raw.id,
     channel: raw.channel,
 
@@ -29,7 +49,7 @@ async function getMessages(channel: string): Promise<Message[]> {
     timestamp: raw.timestamp,
     date: raw.date,
     body: raw.body,
-  }));
+  };
 }
 
 export async function postMessage(channel: string, body: string) {
@@ -52,11 +72,11 @@ export async function editMessage(
 
 export async function submitMessage(
   topic: string,
-  message: Message | undefined,
+  messageId: string | undefined,
   text: string,
 ) {
-  if (message) {
-    await editMessage(topic, message.id, text);
+  if (messageId) {
+    await editMessage(topic, messageId, text);
   } else {
     await postMessage(topic, text);
   }

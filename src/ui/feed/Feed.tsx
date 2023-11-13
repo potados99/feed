@@ -1,11 +1,11 @@
-import Form from "./Form";
 import styled from "styled-components";
 import useFeed from "./useFeed";
 import FeedItem from "./FeedItem";
-import { Message } from "../../data/api";
 import FeedSkeleton from "./FeedSkeleton";
 import { ErrorView } from "../../common/boilerplate";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { feedEventChannel } from "../../common/eventChannels";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type Props = {
   topic: string;
@@ -13,20 +13,18 @@ type Props = {
 
 export default function Feed({ topic }: Props) {
   const { isLoading, isError, feed, reload } = useFeed(topic);
-  const [popupVisible, setPopupVisible] = useState(false);
-  const [messageInEdit, setMessageInEdit] = useState<Message>();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    popupVisible && (document.body.style.overflow = "hidden");
-    !popupVisible && (document.body.style.overflow = "unset");
-  }, [popupVisible]);
+    return feedEventChannel.on("onInvalidate", reload);
+  }, []);
 
   const view = (
     <Container>
       <NewButton
         onClick={() => {
-          setMessageInEdit(undefined);
-          setPopupVisible(true);
+          navigate(`/${topic}/new`, { state: { previousLocation: location } });
         }}
       >
         무슨 생각을 하고 있나요?
@@ -38,21 +36,12 @@ export default function Feed({ topic }: Props) {
           hasNext={i < feed.length - 1}
           hasPrevious={i > 0}
           onEdit={() => {
-            setMessageInEdit(message);
-            setPopupVisible(true);
+            navigate(`/${topic}/edit/${message.id}`, {
+              state: { previousLocation: location },
+            });
           }}
         />
       ))}
-      <Form
-        visible={popupVisible}
-        topic={topic}
-        message={messageInEdit}
-        onClose={() => setPopupVisible(false)}
-        onSubmit={() => {
-          reload();
-          setPopupVisible(false);
-        }}
-      />
     </Container>
   );
 

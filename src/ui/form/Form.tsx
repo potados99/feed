@@ -1,45 +1,33 @@
-import useApi from "../../data/useApi";
+import React from "react";
 import styled from "styled-components";
 import useScreenSize from "../../common/useScreenSize";
+import useMessageEdit from "./useMessageEdit";
+import useTextAreaModal from "./useTextAreaModal";
 import { IoIosArrowBack } from "react-icons/io";
-import { Message, submitMessage } from "../../data/api";
-import React, { useEffect, useState } from "react";
-import useFocus from "../../common/useFocus";
+import { feedEventChannel } from "../../common/eventChannels";
+import { useNavigate, useParams } from "react-router-dom";
 
-type Props = {
-  visible: boolean;
-  topic: string;
-  message?: Message;
-  onClose: () => void;
-  onSubmit: () => void;
-};
-
-export default function Form({
-  visible,
-  topic,
-  message,
-  onClose,
-  onSubmit,
-}: Props) {
+export default function Form() {
   const { isWideScreen } = useScreenSize();
+  const { topic, messageId } = useParams();
+  const navigate = useNavigate();
 
-  const [text, setText] = useState<string>("");
-  const [textAreaRef, setFocus] = useFocus();
+  const onClose = () => {
+    navigate(-1);
+  };
 
-  const { isLoading, isError, invoke } = useApi(
-    () => submitMessage(topic, message, text).then(onSubmit),
-    [topic, message, text],
+  const onSubmit = () => {
+    feedEventChannel.emit("onInvalidate");
+    navigate(-1);
+  };
+
+  const { isLoading, isError, text, setText, submit } = useMessageEdit(
+    topic!!,
+    messageId,
+    onSubmit,
   );
 
-  useEffect(() => {
-    setText(message?.body ?? "");
-  }, [topic, message]);
-
-  useEffect(() => {
-    if (visible) {
-      setTimeout(setFocus, 500); // wait until animation ends.
-    }
-  }, [visible]);
+  const { visible, textAreaRef } = useTextAreaModal();
 
   return (
     <>
@@ -51,8 +39,8 @@ export default function Form({
           </LeftButton>
           {isLoading && <div>Loading...</div>}
           {isError && <div>Error!</div>}
-          {!isLoading && !isError && (message ? "편집" : "작성")}
-          <MainButton onClick={invoke}>완료</MainButton>
+          {!isLoading && !isError && (messageId ? "편집" : "작성")}
+          <MainButton onClick={submit}>완료</MainButton>
         </ButtonBar>
         <Divider></Divider>
         <TextArea

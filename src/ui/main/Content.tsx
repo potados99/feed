@@ -1,27 +1,39 @@
 import Feed from "../feed/Feed";
+import Form from "../form/Form";
 import React from "react";
 import styled from "styled-components";
 import FeedSkeleton from "../feed/FeedSkeleton";
 import { ErrorView } from "../../common/boilerplate";
 import { TopicConsumerProps } from "../../common/types";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 export default function Content({
   isLoading,
   isError,
   topics,
 }: TopicConsumerProps) {
+  const location = useLocation();
+  const previousLocation = location.state?.previousLocation;
+
   const view = (
-    <Routes>
-      <Route path="/" element={<Navigate to={topics[0]?.body} />} />
-      {topics.map((topic) => (
-        <Route
-          path={`/${topic.body}`}
-          element={<Feed topic={topic.body} />}
-          key={topic.id}
-        />
-      ))}
-    </Routes>
+    <>
+      <Routes location={previousLocation || location}>
+        <Route path="/" element={<Navigate to={topics[0]?.body} />} />
+        {topics.map((topic) => (
+          <Route
+            path={`/${topic.body}`}
+            element={<Feed topic={topic.body} />}
+            key={topic.id}
+          />
+        ))}
+      </Routes>
+      {previousLocation && (
+        <Routes>
+          <Route path="/:topic/new" element={<Form />} />
+          <Route path="/:topic/edit/:messageId" element={<Form />} />
+        </Routes>
+      )}
+    </>
   );
 
   return (
