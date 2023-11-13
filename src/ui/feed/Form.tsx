@@ -52,11 +52,11 @@ export default function Form({
 const Container = styled.div<{ $visible: boolean; $widthLimited: boolean }>`
   position: fixed;
   width: ${({ $widthLimited }) => ($widthLimited ? "600px" : "inherit")};
-  margin: 0 auto;
-  top: 12px;
-  right: 12px;
-  bottom: 12px;
-  left: 12px;
+  margin: ${({ $widthLimited }) => ($widthLimited ? "12px auto" : "0 auto")};
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
 
   display: flex;
   flex-direction: column;
@@ -64,18 +64,19 @@ const Container = styled.div<{ $visible: boolean; $widthLimited: boolean }>`
   align-items: stretch;
 
   background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  border-radius: ${({ $widthLimited }) => ($widthLimited ? "12px" : "0")};
+  box-shadow: ${({ $widthLimited }) =>
+    $widthLimited ? "0 0 10px 0 rgba(0, 0, 0, 0.2)" : "none"};
 
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transform: ${({ $visible }) =>
-    $visible ? "translateY(0)" : "translateY(-10%)"};
+    $visible ? "translateY(0)" : "translateY(+5%)"};
   visibility: ${({ $visible }) => ($visible ? "visible" : "collapse")};
 
   transition:
-    visibility 0.3s ease-in-out,
-    opacity 0.3s ease-in-out,
-    transform 0.3s ease-in-out;
+    visibility 0.2s ease-in-out,
+    opacity 0.2s ease-in-out,
+    transform 0.2s ease-in-out;
 `;
 
 const ButtonBar = styled.div`
