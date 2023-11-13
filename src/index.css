@@ -1,6 +1,5 @@
 html {
-    width: 100vw; /* as wide as the screen width, not affected by the scroll bar.*/
-    overflow-x: hidden; /* prevent horizontal scroll.*/
+    scrollbar-gutter: stable; /*prevent scroll bar pushing layout to left.*/
 }
 
 body {
