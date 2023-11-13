@@ -33,30 +33,35 @@ export default function Form({
   }, [topic, message]);
 
   return (
-    <Container $visible={visible} $widthLimited={isWideScreen}>
-      <ButtonBar>
-        <LeftButton onClick={onClose}>
-          <IoIosArrowBack size={28} />
-        </LeftButton>
-        {isLoading && <div>Loading...</div>}
-        {isError && <div>Error!</div>}
-        {!isLoading && !isError && (message ? "편집" : "작성")}
-        <MainButton onClick={invoke}>완료</MainButton>
-      </ButtonBar>
-      <Divider></Divider>
-      <TextArea
-        placeholder={"Markdown supported!"}
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      ></TextArea>
-    </Container>
+    <>
+      <Background $visible={visible && isWideScreen} />
+      <Container $visible={visible} $widthLimited={isWideScreen}>
+        <ButtonBar>
+          <LeftButton onClick={onClose}>
+            <IoIosArrowBack size={28} />
+          </LeftButton>
+          {isLoading && <div>Loading...</div>}
+          {isError && <div>Error!</div>}
+          {!isLoading && !isError && (message ? "편집" : "작성")}
+          <MainButton onClick={invoke}>완료</MainButton>
+        </ButtonBar>
+        <Divider></Divider>
+        <TextArea
+          placeholder={"Markdown supported!"}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        ></TextArea>
+      </Container>
+    </>
   );
 }
 
 const Container = styled.div<{ $visible: boolean; $widthLimited: boolean }>`
+  z-index: 1000;
   position: fixed;
   width: ${({ $widthLimited }) => ($widthLimited ? "600px" : "inherit")};
-  margin: ${({ $widthLimited }) => ($widthLimited ? "12px auto" : "0 auto")};
+  height: ${({ $widthLimited }) => ($widthLimited ? "400px" : "100%")};
+  margin: ${({ $widthLimited }) => ($widthLimited ? "auto auto" : "0 auto")};
   top: 0px;
   right: 0px;
   bottom: 0px;
@@ -79,6 +84,24 @@ const Container = styled.div<{ $visible: boolean; $widthLimited: boolean }>`
   transition:
     visibility 0.2s ease-in-out,
     transform 0.2s ease-in-out;
+`;
+
+const Background = styled.div<{ $visible: boolean }>`
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
+  background: gray;
+  backdrop-filter: blur(6px);
+
+  visibility: ${({ $visible }) => ($visible ? "visible" : "collapse")};
+  opacity: ${({ $visible }) => ($visible ? 0.8 : 0)};
+
+  transition:
+    visibility 0.2s ease-in-out,
+    opacity 0.2s ease-in-out;
 `;
 
 const ButtonBar = styled.div`
