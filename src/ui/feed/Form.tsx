@@ -4,6 +4,7 @@ import useScreenSize from "../../common/useScreenSize";
 import { IoIosArrowBack } from "react-icons/io";
 import { Message, submitMessage } from "../../data/api";
 import React, { useEffect, useState } from "react";
+import useFocus from "../../common/useFocus";
 
 type Props = {
   visible: boolean;
@@ -21,7 +22,9 @@ export default function Form({
   onSubmit,
 }: Props) {
   const { isWideScreen } = useScreenSize();
+
   const [text, setText] = useState<string>("");
+  const [textAreaRef, setFocus] = useFocus();
 
   const { isLoading, isError, invoke } = useApi(
     () => submitMessage(topic, message, text).then(onSubmit),
@@ -32,9 +35,15 @@ export default function Form({
     setText(message?.body ?? "");
   }, [topic, message]);
 
+  useEffect(() => {
+    if (visible) {
+      setTimeout(setFocus, 500); // wait until animation ends.
+    }
+  }, [visible]);
+
   return (
     <>
-      <Background $visible={visible && isWideScreen} />
+      <Background $visible={visible && isWideScreen} onClick={onClose} />
       <Container $visible={visible} $widthLimited={isWideScreen}>
         <ButtonBar>
           <LeftButton onClick={onClose}>
@@ -47,6 +56,7 @@ export default function Form({
         </ButtonBar>
         <Divider></Divider>
         <TextArea
+          ref={textAreaRef}
           placeholder={"Markdown supported!"}
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -88,10 +98,10 @@ const Container = styled.div<{ $visible: boolean; $widthLimited: boolean }>`
 
 const Background = styled.div<{ $visible: boolean }>`
   position: fixed;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
   background: gray;
 
