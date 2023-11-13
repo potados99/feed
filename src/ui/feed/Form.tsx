@@ -94,7 +94,6 @@ const Background = styled.div<{ $visible: boolean }>`
   left: 0px;
 
   background: gray;
-  backdrop-filter: blur(6px);
 
   visibility: ${({ $visible }) => ($visible ? "visible" : "collapse")};
   opacity: ${({ $visible }) => ($visible ? 0.8 : 0)};
