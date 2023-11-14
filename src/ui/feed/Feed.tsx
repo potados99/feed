@@ -69,6 +69,6 @@ const NewButton = styled.button`
   padding-top: 14px;
   background-color: transparent;
   border: none;
-  color: #07f;
+  color: ${({ theme }) => theme.highlight};
   font-size: 16px;
 `;

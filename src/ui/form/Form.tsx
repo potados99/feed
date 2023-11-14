@@ -31,7 +31,7 @@ export default function Form() {
 
   return (
     <>
-      <Background $visible={visible && isWideScreen} onClick={onClose} />
+      <BackdropOverlay $visible={visible && isWideScreen} onClick={onClose} />
       <Container $visible={visible} $widthLimited={isWideScreen}>
         <ButtonBar>
           <LeftButton onClick={onClose}>
@@ -39,12 +39,15 @@ export default function Form() {
           </LeftButton>
           {isLoading && <div>로드 중...</div>}
           {isError && <div>문제 발생!</div>}
-          {!isLoading && !isError && (messageId ? "편집" : "작성")}
+          {!isLoading && !isError && (
+            <TitleLabel>{messageId ? "편집" : "작성"}</TitleLabel>
+          )}
           <MainButton onClick={submit}>완료</MainButton>
         </ButtonBar>
         <Divider></Divider>
         <TextArea
           ref={textAreaRef}
+          $widthLimited={isWideScreen}
           placeholder={(!isLoading && !isError && "마크다운 지원됨!") || ""}
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -60,17 +63,18 @@ const Container = styled.div<{ $visible: boolean; $widthLimited: boolean }>`
   width: ${({ $widthLimited }) => ($widthLimited ? "600px" : "inherit")};
   height: ${({ $widthLimited }) => ($widthLimited ? "400px" : "100%")};
   margin: ${({ $widthLimited }) => ($widthLimited ? "auto auto" : "0 auto")};
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: stretch;
 
-  background-color: white;
+  background-color: ${({ $widthLimited, theme }) =>
+    $widthLimited ? theme.modal : theme.background};
   border-radius: ${({ $widthLimited }) => ($widthLimited ? "12px" : "0")};
   box-shadow: ${({ $widthLimited }) =>
     $widthLimited ? "0 0 10px 0 rgba(0, 0, 0, 0.2)" : "none"};
@@ -84,14 +88,14 @@ const Container = styled.div<{ $visible: boolean; $widthLimited: boolean }>`
     transform 0.2s ease-in-out;
 `;
 
-const Background = styled.div<{ $visible: boolean }>`
+const BackdropOverlay = styled.div<{ $visible: boolean }>`
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 
-  background: gray;
+  background: ${({ theme }) => theme.overlay};
 
   visibility: ${({ $visible }) => ($visible ? "visible" : "collapse")};
   opacity: ${({ $visible }) => ($visible ? 0.8 : 0)};
@@ -115,6 +119,11 @@ const LeftButton = styled.button`
   border: none;
   height: 100%;
   font-size: 16px;
+  color: ${({ theme }) => theme.textPrimary};
+`;
+
+const TitleLabel = styled.span`
+  color: ${({ theme }) => theme.textPrimary};
 `;
 
 const MainButton = styled.button`
@@ -122,21 +131,24 @@ const MainButton = styled.button`
   background-color: transparent;
   border: none;
   height: 100%;
-  color: #07f;
+  color: ${({ theme }) => theme.highlight};
   font-weight: bold;
   font-size: 16px;
 `;
 
 const Divider = styled.div`
   height: 1px;
-  background-color: #ddd;
+  background-color: ${({ theme }) => theme.border};
 `;
 
-const TextArea = styled.textarea`
+const TextArea = styled.textarea<{ $widthLimited: boolean }>`
   flex: 1;
   border: none;
   margin: 12px;
   resize: none;
   outline: none;
   font-size: 16px;
+  color: ${({ theme }) => theme.textPrimary};
+  background-color: ${({ $widthLimited, theme }) =>
+    $widthLimited ? theme.modal : theme.background};
 `;

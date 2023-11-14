@@ -42,8 +42,8 @@ const Container = styled.div`
     display: none;
   }
 
-  background: white;
-  border-bottom: 1px solid #e6e6e6;
+  background: ${({ theme }) => theme.background};
+  border-bottom: 1px solid ${({ theme }) => theme.border};
 
   position: sticky;
   top: 0;

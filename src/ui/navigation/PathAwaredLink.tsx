@@ -22,11 +22,13 @@ export default function PathAwaredLink({ to, children }: Props) {
 const Content = styled.div<{ $active: boolean }>`
   padding: 1px 10px 4px 10px;
   text-align: center;
-  border: 1px solid #e8e8e8;
+  border: 1px solid ${({ theme }) => theme.border};
   border-radius: 30px;
 
-  color: ${({ $active }) => ($active ? "#fff" : "#07f")};
-  background: ${({ $active }) => ($active ? "#07f" : "transparent")};
+  color: ${({ $active, theme }) =>
+    $active ? theme.background : theme.highlight};
+  background: ${({ $active, theme }) =>
+    $active ? theme.highlightArea : "transparent"};
 `;
 
 const Container = styled.div`

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Skeleton from "react-loading-skeleton";
 import Markdown from "react-markdown";
 import { Message } from "../../data/api";
+import { ThemedSkeleton } from "../../common/boilerplate";
 
 type Props = {
   isLoading?: boolean;
@@ -29,19 +29,19 @@ export default function FeedItem({
       <ContentContainer>
         <Content>
           {isLoading ? (
-            <Skeleton height={32} />
+            <ThemedSkeleton height={32} />
           ) : (
             <StyledMarkdown>{message?.body}</StyledMarkdown>
           )}
         </Content>
         <Footer>
           {isLoading ? (
-            <Skeleton width={200} />
+            <ThemedSkeleton width={200} />
           ) : (
             <>
-              <FooterAction>{message?.date}</FooterAction>
+              <FooterText>{message?.date}</FooterText>
               <FooterSpace>·</FooterSpace>
-              <FooterAction onClick={onEdit}>편집</FooterAction>
+              <FooterText onClick={onEdit}>편집</FooterText>
             </>
           )}
         </Footer>
@@ -68,7 +68,7 @@ const GraphContainer = styled.div`
 const Line = styled.div<{ $visible: boolean }>`
   flex: 1;
   width: 2px;
-  background-color: #07f;
+  background-color: ${({ theme }) => theme.highlight};
   visibility: ${({ $visible }) => ($visible ? "visible" : "hidden")};
 `;
 
@@ -76,7 +76,7 @@ const Dot = styled.div<{ $active: boolean }>`
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #07f;
+  background-color: ${({ theme }) => theme.highlight};
 
   animation: ${({ $active }) =>
     $active ? "pulse-animation 2s infinite" : "none"};
@@ -95,6 +95,7 @@ const ContentContainer = styled.div`
 const Content = styled.div`
   flex: 1;
   word-break: break-word;
+  color: ${({ theme }) => theme.textPrimary};
 `;
 
 const Footer = styled.div`
@@ -104,15 +105,16 @@ const Footer = styled.div`
   align-items: center;
 `;
 
-const FooterAction = styled.span`
+const FooterText = styled.span`
   margin-top: 4px;
   font-size: 12px;
-  color: #456;
+  color: ${({ theme }) => theme.textSecondary};
 `;
 
-const FooterSpace = styled(FooterAction)`
+const FooterSpace = styled(FooterText)`
   margin-left: 6px;
   margin-right: 6px;
+  color: ${({ theme }) => theme.textSecondary};
 `;
 
 const StyledMarkdown = styled(Markdown)`
@@ -120,5 +122,9 @@ const StyledMarkdown = styled(Markdown)`
 
   img {
     max-width: 100%; // 이미지가 컨테이너를 넘어가지 않도록 합니다.
+  }
+
+  a {
+    color: ${({ theme }) => theme.highlight};
   }
 `;

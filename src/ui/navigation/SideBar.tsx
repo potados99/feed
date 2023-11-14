@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Skeleton from "react-loading-skeleton";
 import PathAwaredLink from "./PathAwaredLink";
 import { TopicConsumerProps } from "../../common/types";
+import { ThemedSkeleton } from "../../common/boilerplate";
 
 export default function SideBar({
   isLoading,
@@ -18,7 +18,7 @@ export default function SideBar({
   return (
     <Container>
       {isLoading && (
-        <Skeleton count={4} height={26} style={{ marginBottom: "8px" }} />
+        <ThemedSkeleton count={4} height={26} style={{ marginBottom: "8px" }} />
       )}
       {isError && <div>Error!</div>}
       {!isLoading && !isError && view}

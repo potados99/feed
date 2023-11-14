@@ -5,6 +5,7 @@ import SideBar from "./navigation/SideBar";
 import Content from "./main/Content";
 import useTopics from "./main/useTopics";
 import useScreenSize from "../common/useScreenSize";
+import GlobalStyle from "./styles/GlobalStyle";
 
 export default function App() {
   const props = useTopics();

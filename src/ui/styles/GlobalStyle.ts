@@ -1,8 +1,12 @@
-html {
-    scrollbar-gutter: stable; /*prevent scroll bar pushing layout to left.*/
-}
+import { createGlobalStyle } from "styled-components";
 
-body {
+const GlobalStyle = createGlobalStyle`
+  html {
+    scrollbar-gutter: stable; /*prevent scroll bar pushing layout to left.*/
+    background: ${({ theme }) => theme.background};
+  }
+
+  body {
     max-width: 600px;
     margin: 0 auto;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,14 +14,16 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
+  }
 
-@keyframes pulse-animation {
+  @keyframes pulse-animation {
     0% {
-        box-shadow: 0 0 0 0px rgba(0, 127, 255, 0.2);
+      box-shadow: 0 0 0 0 rgba(0, 127, 255, 0.2);
     }
     100% {
-        box-shadow: 0 0 0 12px rgba(0, 127, 255, 0);
+      box-shadow: 0 0 0 12px rgba(0, 127, 255, 0);
     }
-}
+  }
+`;
 
+export default GlobalStyle;
