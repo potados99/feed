@@ -2,9 +2,9 @@ import styled from "styled-components";
 import useFeed from "./useFeed";
 import FeedItem from "./FeedItem";
 import FeedSkeleton from "./FeedSkeleton";
-import { ErrorView } from "../../common/boilerplate";
+import { ErrorView } from "../../components/boilerplate";
 import React, { useEffect } from "react";
-import { feedEventChannel } from "../../common/eventChannels";
+import { feedEventChannel } from "../../../common/events/eventChannels";
 import { useLocation, useNavigate } from "react-router-dom";
 
 type Props = {

@@ -3,8 +3,8 @@ import Form from "../form/Form";
 import React from "react";
 import styled from "styled-components";
 import FeedSkeleton from "../feed/FeedSkeleton";
-import { ErrorView } from "../../common/boilerplate";
-import { TopicConsumerProps } from "../../common/types";
+import { ErrorView } from "../../components/boilerplate";
+import { TopicConsumerProps } from "../../../common/types";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 export default function Content({

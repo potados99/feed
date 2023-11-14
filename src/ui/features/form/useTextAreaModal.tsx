@@ -1,4 +1,4 @@
-import useFocus from "../../common/useFocus";
+import useFocus from "../../../common/hooks/useFocus";
 import { useEffect, useState } from "react";
 
 export default function useTextAreaModal() {

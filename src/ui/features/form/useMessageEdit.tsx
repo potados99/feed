@@ -1,6 +1,6 @@
-import useApi from "../../data/useApi";
+import useApi from "../../../data/useApi";
 import useMessage from "./useMessage";
-import { submitMessage } from "../../data/api";
+import { submitMessage } from "../../../data/api";
 import { useEffect, useState } from "react";
 
 export default function useMessageEdit(

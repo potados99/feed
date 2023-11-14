@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import useScreenSize from "../../common/useScreenSize";
+import useScreenSize from "../../../common/hooks/useScreenSize";
 import useMessageEdit from "./useMessageEdit";
 import useTextAreaModal from "./useTextAreaModal";
 import { IoIosArrowBack } from "react-icons/io";
-import { feedEventChannel } from "../../common/eventChannels";
+import { feedEventChannel } from "../../../common/events/eventChannels";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function Form() {

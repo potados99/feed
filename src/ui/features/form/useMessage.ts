@@ -1,5 +1,5 @@
-import useApiData from "../../data/useApiData";
-import { getMessage } from "../../data/api";
+import useApiData from "../../../data/useApiData";
+import { getMessage } from "../../../data/api";
 
 export default function useMessage(topic: string, messageId?: string) {
   const { data, ...others } = useApiData(
