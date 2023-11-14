@@ -110,7 +110,7 @@ const ButtonBar = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 42px;
+  height: 44px;
 `;
 
 const LeftButton = styled.button`
@@ -137,7 +137,7 @@ const MainButton = styled.button`
 `;
 
 const Divider = styled.div`
-  height: 1px;
+  height: 0.5px;
   background-color: ${({ theme }) => theme.border};
 `;
 

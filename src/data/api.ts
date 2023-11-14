@@ -18,7 +18,7 @@ async function getMessages(channel: string): Promise<Message[]> {
   const res = await fetch(
     `https://collect.potados.com/${channel}?response=api`,
   );
-  //await sleep(2000);
+  await sleep(2000);
   const json = (await res.json()) as any[];
 
   return json.map(parseMessage);

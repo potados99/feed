@@ -18,5 +18,11 @@ export function ErrorView() {
 export function ThemedSkeleton(props: SkeletonProps) {
   const theme = useTheme();
 
-  return <Skeleton baseColor={theme.skeleton} {...props} />;
+  return (
+    <Skeleton
+      baseColor={theme.skeleton}
+      highlightColor={theme.skeletonShine}
+      {...props}
+    />
+  );
 }

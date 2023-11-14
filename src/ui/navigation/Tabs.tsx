@@ -25,8 +25,8 @@ export default function Tabs({
         <InlineSkeleton
           count={3}
           width={100}
-          height={29}
-          style={{ marginTop: "12px", marginLeft: "12px" }}
+          height={28}
+          style={{ marginTop: "8px", marginLeft: "12px", marginBottom: "8px" }}
         />
       )}
       {isError && <HorizontalErrorView />}

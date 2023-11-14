@@ -6,6 +6,7 @@ export const lightTheme = {
   textSecondary: "#456",
   border: "#eee",
   skeleton: "#eee",
+  skeletonShine: "#f1f1f1",
   overlay: "#777",
   modal: "#fff",
 };
@@ -18,6 +19,7 @@ export const darkTheme = {
   textSecondary: "#9aa0a6",
   border: "#555",
   skeleton: "#222",
+  skeletonShine: "#333",
   overlay: "#222",
   modal: "#262626",
 };
