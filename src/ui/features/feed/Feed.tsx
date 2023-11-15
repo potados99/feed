@@ -6,7 +6,7 @@ import { ErrorView } from "../../components/boilerplate";
 import React, { useEffect } from "react";
 import { feedEventChannel } from "../../../common/events/eventChannels";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { BsPencilSquare } from "react-icons/bs";
 type Props = {
   topic: string;
 };
@@ -31,7 +31,8 @@ export default function Feed({ topic }: Props) {
           navigate(`/${topic}/new`, { state: { previousLocation: location } });
         }}
       >
-        무슨 생각을 하고 있나요?
+        <ButtonText>무슨 생각을 하고 있나요?</ButtonText>
+        <BsPencilSquare />
       </NewButton>
       {feed.map((message, i) => (
         <FeedItem
@@ -66,9 +67,19 @@ const Container = styled.div`
 `;
 
 const NewButton = styled.button`
-  padding-top: 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  margin: 14px 10px;
   background-color: transparent;
-  border: none;
+  border: 1px solid ${({ theme }) => theme.highlight};
+  border-radius: 8px;
   color: ${({ theme }) => theme.highlight};
   font-size: 16px;
+`;
+
+const ButtonText = styled.span`
+  margin: 0 6px;
 `;

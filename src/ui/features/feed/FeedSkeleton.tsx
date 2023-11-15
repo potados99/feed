@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import FeedItem from "./FeedItem";
 
 type Props = {
@@ -7,7 +8,8 @@ type Props = {
 
 export default function FeedSkeleton({ count }: Props) {
   return (
-    <div>
+    <Container>
+      <StatusLabel>불러오는 중,,,</StatusLabel>
       {new Array(count).fill(0).map((_, i) => (
         <FeedItem
           isLoading={true}
@@ -16,6 +18,23 @@ export default function FeedSkeleton({ count }: Props) {
           hasPrevious={i > 0}
         />
       ))}
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: stretch;
+`;
+
+const StatusLabel = styled.div`
+  padding: 8px;
+  margin: 14px 8px;
+  background-color: transparent;
+  border: none;
+  color: ${({ theme }) => theme.textSecondary};
+  font-size: 16px;
+  text-align: center;
+`;
