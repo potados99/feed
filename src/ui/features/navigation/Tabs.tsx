@@ -50,6 +50,8 @@ const Container = styled.div`
 
   position: sticky;
   top: 0;
+
+  padding: 0 4px;
 `;
 
 const Topic = styled.div`
