@@ -92,8 +92,6 @@ const Dot = styled.div<{ $active: boolean }>`
 
 const ContentContainer = styled.div`
   flex: 1;
-  margin-top: 12px;
-  margin-bottom: 12px;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
@@ -107,7 +105,7 @@ const Content = styled.div`
 `;
 
 const Footer = styled.div`
-  margin-bottom: 18px;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -127,7 +125,7 @@ const FooterSpace = styled(FooterText)`
 `;
 
 const StyledMarkdown = styled(Markdown)`
-  margin: -28px 0 -12px 0; // Markdown 컴포넌트가 기본적으로 제공하는 margin을 제거합니다.
+  margin: -16px 0 -12px 0; // Markdown 컴포넌트가 기본적으로 제공하는 margin을 제거합니다.
 
   img {
     max-width: 100%; // 이미지가 컨테이너를 넘어가지 않도록 합니다.
