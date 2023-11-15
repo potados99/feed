@@ -18,7 +18,10 @@ export default function Content({
   const view = (
     <>
       <Routes location={previousLocation || location}>
-        <Route path="/" element={<Navigate to={topics[0]?.body} />} />
+        <Route
+          path="/"
+          element={<Navigate to={topics[0]?.body} replace={true} />}
+        />
         {topics.map((topic) => (
           <Route
             path={`/${topic.body}`}
