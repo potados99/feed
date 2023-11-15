@@ -39,7 +39,15 @@ export default function FeedItem({
             <ThemedSkeleton width={200} />
           ) : (
             <>
-              <FooterText>{message?.date}</FooterText>
+              <FooterText
+                onClick={
+                  message?.updatedAt
+                    ? () => alert(`마지막 수정 ${message?.updatedAt}`)
+                    : undefined
+                }
+              >
+                {message?.createdAt}
+              </FooterText>
               <FooterSpace>·</FooterSpace>
               <FooterText onClick={onEdit}>편집</FooterText>
             </>

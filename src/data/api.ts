@@ -1,8 +1,9 @@
 export type Message = {
   id: string;
   channel: string;
-  timestamp: number;
-  date: string;
+  timestamp: number; // createdAt 의 timestamp
+  createdAt: string;
+  updatedAt?: string;
   body: string;
 };
 
@@ -41,13 +42,19 @@ export async function getMessage(
 }
 
 function parseMessage(raw: any): Message {
+  const date = (d: Date) =>
+    new Date(d).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
+
+  const commits = raw.commits as any[];
+  const firstCommit = commits[0];
+  const lastCommit = commits.filter((c) => c.type === "patch").pop();
+
   return {
     id: raw.id,
     channel: raw.channel,
-
-    // API가 주는 호환용 필드를 사용합니다.
     timestamp: raw.timestamp,
-    date: raw.date,
+    createdAt: date(firstCommit.committedAt),
+    updatedAt: lastCommit ? date(lastCommit.committedAt) : undefined,
     body: raw.body,
   };
 }
