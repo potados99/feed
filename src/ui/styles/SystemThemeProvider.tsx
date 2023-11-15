@@ -8,13 +8,6 @@ export function SystemThemeProvider({ children }: PropsWithChildren) {
     query: "(prefers-color-scheme: dark)",
   });
 
-  document
-    .querySelector("meta[name='theme-color']")
-    ?.setAttribute(
-      "content",
-      systemPrefersDark ? darkTheme.background : lightTheme.background,
-    );
-
   return (
     <ThemeProvider theme={systemPrefersDark ? darkTheme : lightTheme}>
       {children}
