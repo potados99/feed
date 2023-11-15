@@ -37,11 +37,11 @@ export default function Form() {
           <LeftButton onClick={onClose}>
             <IoIosArrowBack size={28} />
           </LeftButton>
-          {isLoading && <div>로드 중...</div>}
-          {isError && <div>문제 발생!</div>}
-          {!isLoading && !isError && (
-            <TitleLabel>{messageId ? "편집" : "작성"}</TitleLabel>
-          )}
+          <TitleLabel>
+            {isLoading && "로드 중..."}
+            {isError && "문제 발생!"}
+            {!isLoading && !isError && (messageId ? "편집" : "작성")}
+          </TitleLabel>
           <MainButton onClick={submit}>완료</MainButton>
         </ButtonBar>
         <Divider></Divider>
