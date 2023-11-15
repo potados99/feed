@@ -72,7 +72,7 @@ const NewButton = styled.button`
   justify-content: center;
   align-items: center;
   padding: 8px;
-  margin: 14px 10px 20px 10px;
+  margin: 20px 10px 20px 10px;
   background-color: transparent;
   border: 1px solid ${({ theme }) => theme.highlight};
   border-radius: 8px;

@@ -27,9 +27,9 @@ export default function SideBar({
 }
 
 const Container = styled.div`
-  margin-top: 12px;
+  margin-top: 20px;
 `;
 
 const Topic = styled.div`
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 `;
