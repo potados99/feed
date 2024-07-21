@@ -7,7 +7,7 @@ type Props = {
 } & PropsWithChildren;
 
 export default function PathAwaredLink({ to, children }: Props) {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation(); // 요 친구는 이미 url encoding이 되어있는 상태로 반환됩니다. "SeongYeol's%20Lovely%20Space" 이런 식이에요. 그래서 decodeURI를 해줘야 합니다.
   const nowIn = !!matchPath(`${to}/*`, decodeURI(pathname));
 
   return (
