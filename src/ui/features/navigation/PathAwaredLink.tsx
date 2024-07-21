@@ -8,7 +8,7 @@ type Props = {
 
 export default function PathAwaredLink({ to, children }: Props) {
   const { pathname } = useLocation();
-  const nowIn = !!matchPath(`${to}/*`, pathname);
+  const nowIn = !!matchPath(`${to}/*`, decodeURI(pathname));
 
   return (
     <Container>
